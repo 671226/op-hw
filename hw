@@ -1,0 +1,66 @@
+from itertools import zip_longest
+
+
+class pepa:
+    def __init__(self, elements=[]):
+        self.elements = elements
+
+    def __str__(self):
+        return f"{self.elements}"
+
+    def __add__(self, z):
+        result = [sum(x) for x in zip_longest(self.elements, z.elements, fillvalue=0)]
+   
+        return result
+    
+    def minus(self, z):
+        result = [x-y for x,y in zip_longest(self.elements, z.elements, fillvalue=0)]
+        return result
+
+
+    def append(self, n):
+        self.elements.append(n)
+        print(self.elements)
+
+    def pop(self):
+        self.elements.pop()
+        print(self.elements)
+
+    def max(self):
+        c = -1
+        for i in range(len(self.elements)):
+            if self.elements[i] > c:
+                c = self.elements[i]
+        print(c)
+
+    def min(self):
+        c = 1
+        for i in range(len(self.elements)):
+            if self.elements[i] < c:
+                c = self.elements[i]
+        print(c)
+
+    def __len__(self):
+        return len(self.elements)
+    
+    def compare(self, z1):
+        if self.elements == z1.elements:
+            print(True)
+        elif self.elements > z1.elements:
+            print(False)
+        elif self.elements < z1.elements:
+            print(False)
+
+z1 = pepa([1,5,6,3])
+z2 = pepa([9,4,3])
+
+print(z1.__add__(z2))
+print(z1.minus(z2))
+z1.append(1)
+z1.min()
+z1.max()
+z2.pop()
+print(len(z1))
+
+print("Is the first array equal to the second?")
+z1.compare(z2)
